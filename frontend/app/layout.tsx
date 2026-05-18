@@ -1,29 +1,28 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/shared/Providers";
 
-const inter = Inter({
-  variable: "--font-inter",
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-body",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "CareerArchitect — The Curated Career Platform",
-  description: "The world's most sophisticated career management platform for modern engineers, designers, and visionaries.",
+  title: "NCRJobs",
+  description: "NCR-first job portal connecting students, recruiters, and staff teams on one verified hiring workflow.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-inter bg-surface text-on-surface">
-        <Providers>{children}</Providers>
-      </body>
+    <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-body">{children}</body>
     </html>
   );
 }

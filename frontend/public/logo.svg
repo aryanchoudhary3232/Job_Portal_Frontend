@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <defs>
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#312E81;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Professional Icon: Abstract 'n' + briefcase/growth symbol -->
+  <g transform="translate(10, 15)">
+    <rect x="0" y="0" width="70" height="70" rx="16" fill="url(#brand-grad)" />
+    <!-- Stylized rising line/ladder within the mark -->
+    <path d="M20 50V35C20 29.4772 24.4772 25 30 25H40C45.5228 25 50 29.4772 50 35V50" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <rect x="25" y="45" width="20" height="12" rx="4" fill="white" />
+  </g>
+
+  <!-- Professional Typography -->
+  <text x="95" y="66" font-family="Inter, -apple-system, sans-serif" font-weight="800" font-size="44" letter-spacing="-0.02em" fill="#0F172A">
+    ncr<tspan fill="#4F46E5">jobs</tspan>
+  </text>
+</svg>
