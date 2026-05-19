@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520" role="img" aria-label="Welcome illustration">
+  <defs>
+    <linearGradient id="orb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c8b1ff" />
+      <stop offset="100%" stop-color="#8f5bff" />
+    </linearGradient>
+    <linearGradient id="orbInner" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a972ff" />
+      <stop offset="100%" stop-color="#6c2bd9" />
+    </linearGradient>
+  </defs>
+  <rect width="520" height="520" fill="none" />
+  <ellipse cx="260" cy="420" rx="150" ry="26" fill="#2f145f" opacity="0.35" />
+  <g transform="translate(70 70)">
+    <rect width="170" height="90" rx="26" fill="#9f6bff" />
+    <text x="85" y="58" font-family="Manrope, Arial, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#ffffff">Hi~</text>
+  </g>
+  <circle cx="260" cy="260" r="160" fill="url(#orb)" />
+  <circle cx="260" cy="260" r="120" fill="url(#orbInner)" opacity="0.9" />
+  <text x="260" y="300" font-family="Manrope, Arial, sans-serif" font-size="140" font-weight="800" text-anchor="middle" fill="#ffffff">N</text>
+  <circle cx="140" cy="210" r="6" fill="#ffffff" opacity="0.7" />
+  <circle cx="380" cy="190" r="8" fill="#ffffff" opacity="0.6" />
+  <circle cx="380" cy="330" r="6" fill="#ffffff" opacity="0.6" />
+</svg>

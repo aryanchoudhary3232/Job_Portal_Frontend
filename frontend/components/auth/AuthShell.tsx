@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import React from "react";
 import Link from "next/link";
 
 export function AuthShell({
@@ -9,6 +10,8 @@ export function AuthShell({
   stickerSubtitle,
   stickerImage,
   stickerCta,
+  compact,
+  topRightLink,
   children,
 }: {
   eyebrow: string;
@@ -18,55 +21,110 @@ export function AuthShell({
   stickerSubtitle?: string;
   stickerImage?: string;
   stickerCta?: string;
+  compact?: boolean;
+  topRightLink?: React.ReactNode;
   children: ReactNode;
 }) {
+  const panelPadding = compact ? "p-10" : "p-14";
+  const contentPadding = compact ? "py-6" : "py-10";
   const sticker = stickerImage ? (
-    <div className="rounded-[32px] bg-white p-4 shadow-[0_25px_70px_rgba(17,24,39,0.18)] ring-1 ring-[var(--outline-variant)]">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <img src="/logo.svg" alt="NCRJobs" className="h-9 w-9" />
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">NCRJobs</p>
-            <p className="text-sm font-bold text-slate-900 font-display">{stickerTitle}</p>
-          </div>
-        </div>
-        <span className="rounded-full bg-[var(--primary-fixed)] px-3 py-1 text-[10px] font-bold text-[var(--primary)]">
-          {stickerCta || "Back to website"}
-        </span>
+    <div className="flex w-full items-center justify-center">
+      {/* Fixed-size box — illustration never grows beyond this */}
+      <div
+        style={{ width: 340, height: 340, flexShrink: 0 }}
+        className="flex items-center justify-center overflow-hidden"
+      >
+        <img
+          src={stickerImage}
+          alt={stickerTitle || "NCRJobs mascot"}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+          className="drop-shadow-[0_35px_80px_rgba(20,9,60,0.45)]"
+        />
       </div>
-      <div className="mt-4 rounded-[24px] bg-[#f4f6ff] p-3">
-        <img src={stickerImage} alt={stickerTitle || "NCRJobs sticker"} className="w-full rounded-[18px] object-cover" />
-      </div>
-      {stickerSubtitle ? <p className="mt-4 text-xs font-medium text-slate-500">{stickerSubtitle}</p> : null}
     </div>
   ) : null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[var(--surface)]">
+    <div className="relative h-screen overflow-hidden page-shell">
+      {/* Ambient blobs */}
       <div className="fixed -top-24 -left-24 -z-10 h-96 w-96 rounded-full bg-[rgba(195,192,255,0.2)] blur-3xl" />
       <div className="fixed -bottom-24 -right-24 -z-10 h-96 w-96 rounded-full bg-[rgba(79,70,229,0.16)] blur-3xl" />
-      <div className="flex min-h-screen">
-        <section className="signature-gradient relative hidden lg:flex lg:w-[45%] xl:w-[40%] flex-col justify-between overflow-hidden p-14 text-white">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-1/4 -left-20 h-96 w-96 rounded-full bg-white/20 blur-3xl" />
-            <div className="absolute bottom-1/4 -right-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+
+      {/* Back button — top-left: pill with arrow + text */}
+      <Link
+        href="/"
+        className="fixed top-5 left-5 z-50 flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold shadow-lg transition-all duration-200 hover:scale-105"
+        style={{ backgroundColor: "rgba(255,255,255,0.9)", color: "var(--primary)", border: "1px solid var(--outline-variant)", backdropFilter: "blur(12px)" }}
+        aria-label="Back to home"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16" height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 12H5" />
+          <path d="M12 19l-7-7 7-7" />
+        </svg>
+        Back
+      </Link>
+
+
+      <div className="flex h-full">
+        {/* Left gradient panel */}
+        <section
+          className={`signature-gradient relative hidden lg:flex lg:w-[45%] xl:w-[40%] flex-col items-center justify-center overflow-hidden text-white h-full ${panelPadding}`}
+        >
+          {/* Soft glow blobs inside panel */}
+          <div className="absolute inset-0">
+            <div className="absolute top-1/4 -left-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute bottom-1/4 -right-20 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
           </div>
-          <Link href="/" className="relative z-10 text-2xl font-black tracking-tighter font-display">NCRJobs</Link>
-          <div className="relative z-10 space-y-8">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-white/60">{eyebrow}</p>
-            <h1 className="max-w-lg text-4xl font-black leading-tight tracking-[-0.02em] font-display">{title}</h1>
-            <p className="max-w-xl text-lg leading-8 text-white/80">{description}</p>
-          </div>
-          <div className="relative z-10 grid gap-4 sm:grid-cols-3">
-            {["NCR-first hiring", "Selection tracking", "Staff oversight"].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-5 text-sm font-semibold text-white/80">{item}</div>
+
+          {/* Decorative right-edge border accent — vertical strip of stacked dots/rings */}
+          <div className="absolute right-0 top-0 h-full w-10 flex flex-col items-center justify-center gap-4 z-10">
+            {[...Array(9)].map((_, i) => (
+              <span
+                key={i}
+                className="block rounded-full border border-white/25"
+                style={{
+                  width: i % 3 === 0 ? 14 : i % 3 === 1 ? 10 : 6,
+                  height: i % 3 === 0 ? 14 : i % 3 === 1 ? 10 : 6,
+                  opacity: 0.3 + (i % 3) * 0.2,
+                }}
+              />
             ))}
           </div>
-          {sticker ? <div className="relative z-10 mt-8 rotate-[-1deg]">{sticker}</div> : null}
+          {/* A thin glowing right border line */}
+          <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/40 to-transparent" />
+
+          {/* Illustration — fixed box */}
+          {sticker ? <div className="relative z-10">{sticker}</div> : null}
         </section>
-        <section className="flex flex-1 items-center justify-center px-6 py-10 md:px-12">
-          <div className="w-full max-w-md">
-            {sticker ? <div className="mb-6 lg:hidden">{sticker}</div> : null}
+
+        {/* Right content area — scrolls internally if content overflows */}
+        <section className="flex flex-1 h-full overflow-y-auto scrollbar-hidden items-start justify-center px-6 md:px-12">
+          <div className={`w-full max-w-md ${compact ? "py-6" : "py-10"}`}>
+            {/* Top bar: logo left, switch link right — same row */}
+            <div className="hidden lg:flex items-center justify-between mb-8">
+              <img src="/logo-wordmark.svg" alt="NCRJobs" className="h-11 w-auto" />
+              {topRightLink && (
+                <div
+                  className="rounded-full px-4 py-2 text-sm"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.82)",
+                    border: "1px solid var(--outline-variant)",
+                    backdropFilter: "blur(10px)",
+                  }}
+                >
+                  {topRightLink}
+                </div>
+              )}
+            </div>
             {children}
           </div>
         </section>

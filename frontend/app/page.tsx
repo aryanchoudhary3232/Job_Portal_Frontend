@@ -1,15 +1,21 @@
-import { ClosingCta } from "@/components/marketing/ClosingCta";
-import { FeatureGrid } from "@/components/marketing/FeatureGrid";
 import { Hero } from "@/components/marketing/Hero";
-import { RoleGrid } from "@/components/marketing/RoleGrid";
+import { MarketingNavbar } from "@/components/marketing/MarketingNavbar";
+import { SalaryInsights } from "@/components/marketing/SalaryInsights";
+import { SiteFooter } from "@/components/marketing/SiteFooter";
+import { TopCompaniesStrip } from "@/components/marketing/TopCompaniesStrip";
+import { TrendingJobs } from "@/components/marketing/TrendingJobs";
 
 export default function LandingPage() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-4 sm:px-6 lg:px-8">
-      <Hero />
-      <RoleGrid />
-      <FeatureGrid />
-      <ClosingCta />
-    </main>
+    <div className="min-h-screen">
+      <MarketingNavbar />
+      <main className="mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-12 pt-8 sm:px-6 lg:px-8">
+        <Hero />
+        <TrendingJobs />
+        <TopCompaniesStrip />
+        <SalaryInsights />
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

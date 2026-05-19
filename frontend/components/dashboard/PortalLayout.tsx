@@ -40,7 +40,7 @@ export function PortalLayout({
   }, [role, router]);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(91,76,241,0.08),_transparent_24%),linear-gradient(180deg,#f7f8fc_0%,#f5f7fb_100%)]">
+    <div className="min-h-screen portal-shell">
       <div className="mx-auto flex min-h-screen max-w-[1600px]">
         <PortalSidebar role={role} user={user} />
         <main className="min-w-0 flex-1 px-4 py-4 sm:px-6 xl:px-10">

@@ -1,45 +1,72 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Search } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="signature-gradient relative overflow-hidden rounded-[48px] px-6 py-10 text-white shadow-[0_35px_90px_rgba(11,59,115,0.22)] md:px-10 md:py-14">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-white blur-3xl" />
-        <div className="absolute -right-16 bottom-8 h-56 w-56 rounded-full bg-white blur-3xl" />
-      </div>
-      <div className="relative z-10 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-3xl">
-          <p className="enter-fade-up text-xs font-bold uppercase tracking-[0.32em] text-white/70" style={{ animationDelay: "80ms" }}>
-            NCRJobs command center
-          </p>
-          <h1 className="enter-fade-up mt-5 text-5xl font-black tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl font-display" style={{ animationDelay: "160ms" }}>
-            NCR-first hiring operations for students, recruiters, and staff teams.
+    <section className="rounded-[36px] bg-white/80 p-6 shadow-[0_20px_60px_rgba(44,22,84,0.08)] ring-1 ring-[var(--outline-variant)] md:p-10">
+      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.32em] text-[var(--primary)]">Student jobs in NCR</p>
+          <h1 className="mt-5 text-4xl font-black tracking-[-0.04em] text-[var(--on-surface)] sm:text-5xl lg:text-6xl font-display">
+            Find internships and first jobs faster.
           </h1>
-          <p className="enter-fade-up mt-6 max-w-2xl text-lg leading-8 text-white/80" style={{ animationDelay: "240ms" }}>
-            NCRJobs keeps job posts, shortlists, interviews, and selection status in one verified flow with staff oversight and first-salary settlement tracking.
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--on-surface-variant)]">
+            One clean place to discover verified openings, apply with your student profile, and track every update.
           </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/register" className="enter-fade-up inline-flex items-center justify-center gap-2 rounded-[20px] bg-white px-7 py-3.5 text-sm font-bold text-[var(--primary-strong)] shadow-2xl" style={{ animationDelay: "320ms" }}>
-            Start now <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link href="/login" className="enter-fade-up inline-flex items-center justify-center rounded-[20px] border border-white/20 px-7 py-3.5 text-sm font-bold text-white/90" style={{ animationDelay: "400ms" }}>
-            Sign in
-          </Link>
-        </div>
-      </div>
-      <div className="relative z-10 mt-10 grid gap-4 md:grid-cols-3">
-        {[
-          ["NCR-first", "Region-focused launch"],
-          ["3 roles", "Student, recruiter, staff"],
-          ["Verified outcomes", "Selection and settlement"],
-        ].map(([value, label], index) => (
-          <div key={label} className="enter-fade-up rounded-[24px] border border-white/12 bg-white/10 px-5 py-6 backdrop-blur-sm" style={{ animationDelay: `${480 + index * 80}ms` }}>
-            <p className="text-3xl font-black">{value}</p>
-            <p className="mt-2 text-sm text-white/60">{label}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {[
+              ["2k+", "Student openings"],
+              ["450+", "Verified companies"],
+              ["1 dashboard", "Track all applications"],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-2xl border border-[var(--outline-variant)] bg-white px-4 py-4">
+                <p className="text-2xl font-black text-[var(--on-surface)]">{value}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--on-surface-variant)]">{label}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        <form className="card-surface rounded-[28px] p-6">
+          <p className="text-sm font-bold text-[var(--on-surface)]">Search internships & entry roles</p>
+          <div className="mt-5 grid gap-4">
+            <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Role or skills
+              <input
+                type="text"
+                placeholder="Frontend, UI/UX, Data"
+                className="h-12 w-full rounded-xl border border-[var(--outline-variant)] bg-white px-4 text-sm text-[var(--on-surface)] outline-none focus:border-[var(--primary)]"
+              />
+            </label>
+            <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Location
+              <input
+                type="text"
+                placeholder="Noida, Gurgaon, Delhi"
+                className="h-12 w-full rounded-xl border border-[var(--outline-variant)] bg-white px-4 text-sm text-[var(--on-surface)] outline-none focus:border-[var(--primary)]"
+              />
+            </label>
+            <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Experience
+              <select className="h-12 w-full rounded-xl border border-[var(--outline-variant)] bg-white px-4 text-sm text-[var(--on-surface)] outline-none focus:border-[var(--primary)]">
+                <option>Fresher</option>
+                <option>0-1 years</option>
+                <option>1-2 years</option>
+                <option>2-3 years</option>
+              </select>
+            </label>
+            <button
+              type="button"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-5 py-3 text-sm font-bold text-white shadow-[0_12px_30px_rgba(108,43,217,0.3)]"
+            >
+              <Search className="h-4 w-4" />
+              Search jobs
+            </button>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-[var(--primary)]">
+            {["UI/UX", "Frontend", "Data Analyst", "Marketing"].map((item) => (
+              <span key={item} className="rounded-full bg-[var(--primary-fixed)] px-3 py-1">{item}</span>
+            ))}
+          </div>
+        </form>
       </div>
     </section>
   );

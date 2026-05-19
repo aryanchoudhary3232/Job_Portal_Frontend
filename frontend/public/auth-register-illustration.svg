@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520" viewBox="0 0 520 520" role="img" aria-label="Join illustration">
+  <defs>
+    <linearGradient id="orbRegister" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cdb7ff" />
+      <stop offset="100%" stop-color="#8a50ff" />
+    </linearGradient>
+    <linearGradient id="orbRegisterInner" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b07bff" />
+      <stop offset="100%" stop-color="#6c2bd9" />
+    </linearGradient>
+  </defs>
+  <rect width="520" height="520" fill="none" />
+  <ellipse cx="260" cy="420" rx="150" ry="26" fill="#2f145f" opacity="0.35" />
+  <g transform="translate(310 80)">
+    <rect width="150" height="80" rx="24" fill="#9f6bff" />
+    <text x="75" y="52" font-family="Manrope, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#ffffff">Join</text>
+  </g>
+  <circle cx="260" cy="260" r="160" fill="url(#orbRegister)" />
+  <circle cx="260" cy="260" r="120" fill="url(#orbRegisterInner)" opacity="0.9" />
+  <text x="260" y="300" font-family="Manrope, Arial, sans-serif" font-size="140" font-weight="800" text-anchor="middle" fill="#ffffff">N</text>
+  <circle cx="150" cy="190" r="7" fill="#ffffff" opacity="0.6" />
+  <circle cx="380" cy="210" r="6" fill="#ffffff" opacity="0.65" />
+  <circle cx="360" cy="340" r="8" fill="#ffffff" opacity="0.6" />
+</svg>

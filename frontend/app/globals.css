@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f9fa;
-  --foreground: #191c1d;
-  --surface: #f8f9fa;
-  --surface-container: #edeeef;
-  --surface-container-low: #f3f4f5;
+  --background: #fbf9ff;
+  --foreground: #2b1547;
+  --surface: #ffffff;
+  --surface-container: #f4efff;
+  --surface-container-low: #f7f3ff;
   --surface-container-lowest: #ffffff;
-  --on-surface: #191c1d;
-  --on-surface-variant: #464555;
-  --primary: #3525cd;
-  --primary-strong: #2e21b3;
-  --primary-container: #4f46e5;
-  --primary-fixed: #e2dfff;
-  --accent: #4f46e5;
-  --accent-strong: #3525cd;
-  --outline-variant: #c7c4d8;
-  --tertiary-fixed: #dfe7ff;
+  --on-surface: #2b1547;
+  --on-surface-variant: #6b5b87;
+  --primary: #6c2bd9;
+  --primary-strong: #5620b8;
+  --primary-container: #7a40e3;
+  --primary-fixed: #efe6ff;
+  --accent: #9157ff;
+  --accent-strong: #6c2bd9;
+  --outline-variant: #e7dcff;
+  --tertiary-fixed: #f1edff;
+  --shadow-soft: 0 20px 55px rgba(65, 35, 120, 0.12);
+  --shadow-strong: 0 32px 85px rgba(65, 35, 120, 0.22);
 }
 
 * {
@@ -30,9 +32,10 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(195, 192, 255, 0.24), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(79, 70, 229, 0.14), transparent 24%),
-    linear-gradient(180deg, #f8f9fa 0%, #f5f6fb 100%);
+    radial-gradient(circle at 12% 10%, rgba(147, 104, 255, 0.12), transparent 40%),
+    radial-gradient(circle at 88% 12%, rgba(108, 43, 217, 0.08), transparent 38%),
+    radial-gradient(circle at 85% 85%, rgba(125, 84, 230, 0.08), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
 }
@@ -62,6 +65,31 @@ a {
   background: rgba(255, 255, 255, 0.82);
 }
 
+.page-shell {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(147, 104, 255, 0.12), transparent 44%),
+    radial-gradient(circle at 86% 12%, rgba(108, 43, 217, 0.08), transparent 40%),
+    radial-gradient(circle at 86% 84%, rgba(125, 84, 230, 0.08), transparent 42%),
+    linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
+}
+
+.portal-shell {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(147, 104, 255, 0.12), transparent 46%),
+    radial-gradient(circle at 92% 16%, rgba(108, 43, 217, 0.08), transparent 44%),
+    linear-gradient(180deg, #ffffff 0%, #f7f3ff 100%);
+}
+
+.card-surface {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--outline-variant);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-surface-strong {
+  box-shadow: var(--shadow-strong);
+}
+
 @keyframes fade-up {
   0% {
     opacity: 0;
@@ -75,4 +103,13 @@ a {
 
 .enter-fade-up {
   animation: fade-up 0.8s ease both;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
