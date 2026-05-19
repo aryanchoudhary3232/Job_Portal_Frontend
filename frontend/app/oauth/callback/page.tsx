@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { roleRouteMap, setSession } from "@/lib/session";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
 
-export default function OAuthCallbackPage() {
+function OAuthCallbackHandler() {
   const router = useRouter();
   const params = useSearchParams();
   const [message, setMessage] = useState("Completing sign in...");
@@ -37,7 +37,7 @@ export default function OAuthCallbackPage() {
       })
       .then((user) => {
         setSession(token, user);
-        router.replace(roleRouteMap[user.role] || "/student");
+        router.replace((roleRouteMap as any)[user.role] || "/student");
       })
       .catch((err) => {
         setMessage(err instanceof Error ? err.message : "OAuth sign-in failed");
@@ -45,10 +45,22 @@ export default function OAuthCallbackPage() {
   }, [params, router]);
 
   return (
+    <div className="card-surface rounded-[28px] p-8 text-center">
+      <p className="text-sm font-semibold text-[var(--on-surface-variant)]">{message}</p>
+    </div>
+  );
+}
+
+export default function OAuthCallbackPage() {
+  return (
     <main className="mx-auto flex min-h-screen max-w-xl items-center justify-center px-6">
-      <div className="card-surface rounded-[28px] p-8 text-center">
-        <p className="text-sm font-semibold text-[var(--on-surface-variant)]">{message}</p>
-      </div>
+      <Suspense fallback={
+        <div className="card-surface rounded-[28px] p-8 text-center">
+          <p className="text-sm font-semibold text-[var(--on-surface-variant)]">Completing sign in...</p>
+        </div>
+      }>
+        <OAuthCallbackHandler />
+      </Suspense>
     </main>
   );
 }
