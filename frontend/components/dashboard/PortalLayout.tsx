@@ -45,6 +45,17 @@ export function PortalLayout({
         <PortalSidebar role={role} user={user} />
         <main className="min-w-0 flex-1 px-4 py-4 sm:px-6 xl:px-10">
           <PortalHeader title={title} user={user} />
+          {user && !user.isEmailVerified && (
+            <div className="mb-6 flex items-center justify-between gap-4 rounded-[20px] border border-amber-200/40 bg-gradient-to-r from-amber-50 to-amber-100/60 p-4 text-amber-900 shadow-sm">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-200/60 text-base">⚠️</span>
+                <div>
+                  <h4 className="text-sm font-extrabold tracking-tight">Verify Your Email Address</h4>
+                  <p className="text-xs font-semibold text-amber-800/80">We sent a verification link to <strong className="text-amber-900">{user.email}</strong>. Please verify to unlock full features.</p>
+                </div>
+              </div>
+            </div>
+          )}
           <PageState loading={loading} error={error} />
           {!loading && !error && user ? (typeof children === "function" ? children(user) : children) : null}
         </main>

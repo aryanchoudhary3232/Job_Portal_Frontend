@@ -9,9 +9,12 @@ export type User = {
   location?: string;
   college?: string;
   companyName?: string;
+  companyType?: string;
+  employeeRange?: string;
   bio?: string;
   skills?: string[];
   verificationStatus?: string;
+  isEmailVerified?: boolean;
 };
 
 export type Job = {

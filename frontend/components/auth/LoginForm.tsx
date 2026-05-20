@@ -18,8 +18,10 @@ export function LoginForm() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       if (params.get("registered") === "true") {
-        setSuccess("Profile created successfully! Please sign in to continue.");
-        // Clear search params cleanly
+        setSuccess("Profile created successfully! Please verify your email using the link we sent before signing in.");
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else if (params.get("email_verified") === "true") {
+        setSuccess("Email verified successfully! You can now sign in.");
         window.history.replaceState({}, document.title, window.location.pathname);
       }
     }
