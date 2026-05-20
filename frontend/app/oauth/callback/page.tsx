@@ -3,25 +3,29 @@
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { roleRouteMap, setSession } from "@/lib/session";
+import type { User } from "@/lib/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000";
 
 function OAuthCallbackHandler() {
   const router = useRouter();
   const params = useSearchParams();
-  const [message, setMessage] = useState("Completing sign in...");
+  const [message, setMessage] = useState<string | null>(null);
+  const token = params.get("token");
+  const error = params.get("error");
+  const displayMessage =
+    message ||
+    (error
+      ? decodeURIComponent(error)
+      : !token
+        ? "Missing sign-in token. Please try again."
+        : "Completing sign in...");
 
   useEffect(() => {
-    const token = params.get("token");
-    const error = params.get("error");
-    if (error) {
-      setMessage(decodeURIComponent(error));
+    if (error || !token) {
       return;
     }
-    if (!token) {
-      setMessage("Missing sign-in token. Please try again.");
-      return;
-    }
+    let isActive = true;
     fetch(`${baseUrl}/api/auth/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -35,18 +39,27 @@ function OAuthCallbackHandler() {
         }
         return payload.data;
       })
-      .then((user) => {
+      .then((user: User) => {
+        if (!isActive) {
+          return;
+        }
         setSession(token, user);
-        router.replace((roleRouteMap as any)[user.role] || "/student");
+        router.replace(roleRouteMap[user.role] || "/student");
       })
       .catch((err) => {
+        if (!isActive) {
+          return;
+        }
         setMessage(err instanceof Error ? err.message : "OAuth sign-in failed");
       });
-  }, [params, router]);
+    return () => {
+      isActive = false;
+    };
+  }, [error, token, router]);
 
   return (
     <div className="card-surface rounded-[28px] p-8 text-center">
-      <p className="text-sm font-semibold text-[var(--on-surface-variant)]">{message}</p>
+      <p className="text-sm font-semibold text-[var(--on-surface-variant)]">{displayMessage}</p>
     </div>
   );
 }

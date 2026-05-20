@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import type { InputHTMLAttributes } from "react";
 import { api } from "@/lib/api";
 import { roleRouteMap, setSession } from "@/lib/session";
 import type { User } from "@/lib/types";
@@ -126,7 +127,11 @@ export default function RecruiterLoginPage() {
   );
 }
 
-function Field({ label, type = "text", ...props }: { label: string; name: string; placeholder: string; type?: string; [key: string]: any }) {
+type FieldProps = InputHTMLAttributes<HTMLInputElement> & {
+  label: string;
+};
+
+function Field({ label, type = "text", ...props }: FieldProps) {
   return (
     <label className="block">
       <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-slate-500">{label}</span>

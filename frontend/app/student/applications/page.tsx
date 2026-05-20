@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { formatDate } from "@/lib/format";
 import type { Application } from "@/lib/types";
+import { stageLabel } from "@/lib/application-stages";
 import { PortalLayout } from "@/components/dashboard/PortalLayout";
 import { DataTable } from "@/components/dashboard/DataTable";
 import { Panel } from "@/components/dashboard/Panel";
@@ -29,7 +30,7 @@ export default function StudentApplicationsPage() {
               emptyText="No applications yet."
               columns={[
                 { key: "job", label: "Job", render: (item) => <div><p className="font-semibold">{item.job?.title}</p><p className="text-xs text-slate-500">{item.job?.companyName}</p></div> },
-                { key: "stage", label: "Stage", render: (item) => <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{item.stage}</span> },
+                { key: "stage", label: "Status", render: (item) => <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{stageLabel(item.stage)}</span> },
                 { key: "date", label: "Applied", render: (item) => formatDate(item.appliedAt) },
               ]}
             />

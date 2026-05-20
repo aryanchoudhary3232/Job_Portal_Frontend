@@ -7,6 +7,8 @@ import { PortalLayout } from "@/components/dashboard/PortalLayout";
 import { DataTable } from "@/components/dashboard/DataTable";
 import { PageState } from "@/components/dashboard/PageState";
 import { Panel } from "@/components/dashboard/Panel";
+import { InlineError } from "@/components/ui/InlineError";
+import { getErrorMessage } from "@/lib/api-error";
 
 export default function RecruiterJobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -48,32 +50,52 @@ export default function RecruiterJobsPage() {
 }
 
 function JobForm({ onSuccess }: { onSuccess: () => void }) {
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
   return (
     <form
       className="grid gap-4"
       onSubmit={async (event) => {
         event.preventDefault();
-        const form = new FormData(event.currentTarget);
-        await api.post("/api/jobs", {
-          title: form.get("title"),
-          companyName: form.get("companyName"),
-          location: form.get("location"),
-          workMode: form.get("workMode"),
-          type: form.get("type"),
-          salaryRange: form.get("salaryRange"),
-          description: form.get("description"),
-          skills: String(form.get("skills") || "").split(",").map((item) => item.trim()).filter(Boolean),
-        });
-        event.currentTarget.reset();
-        onSuccess();
+        const formElement = event.currentTarget;
+        const form = new FormData(formElement);
+        setFormError("");
+        setSubmitting(true);
+        try {
+          await api.post("/api/jobs", {
+            title: form.get("title"),
+            companyName: form.get("companyName"),
+            location: form.get("location"),
+            workMode: form.get("workMode"),
+            type: form.get("type"),
+            salaryRange: form.get("salaryRange"),
+            description: form.get("description"),
+            skills: String(form.get("skills") || "").split(",").map((item) => item.trim()).filter(Boolean),
+          });
+          formElement.reset();
+          onSuccess();
+        } catch (err) {
+          setFormError(getErrorMessage(err, "Could not publish job"));
+        } finally {
+          setSubmitting(false);
+        }
       }}
     >
+      <InlineError message={formError} />
       {["title", "companyName", "location", "type", "salaryRange", "skills"].map((name) => <input key={name} name={name} placeholder={name} className="h-11 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none" required />)}
       <select name="workMode" className="h-11 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm outline-none" defaultValue="HYBRID">
         {["REMOTE", "HYBRID", "ONSITE"].map((mode) => <option key={mode}>{mode}</option>)}
       </select>
-      <textarea name="description" rows={5} placeholder="Role description" className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none" required />
-      <button className="rounded-full signature-gradient px-5 py-3 text-sm font-semibold text-white">Publish job</button>
+      <textarea name="description" rows={5} placeholder="Role description (min 20 characters)" className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none" required minLength={20} />
+      <p className="text-xs text-slate-500">Skills: comma separated (e.g. React, Node). Description: at least 20 characters.</p>
+      <button
+        type="submit"
+        disabled={submitting}
+        className="rounded-full signature-gradient px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+      >
+        {submitting ? "Publishing..." : "Publish job"}
+      </button>
     </form>
   );
 }

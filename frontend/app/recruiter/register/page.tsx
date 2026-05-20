@@ -367,7 +367,7 @@ export default function RecruiterRegisterPage() {
               {/* Creating Account As */}
               <div className="block">
                 <span className="mb-3 block text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
-                  You're creating account as
+                  You&apos;re creating account as
                 </span>
                 <div className="grid grid-cols-2 gap-3">
                   <button
@@ -715,7 +715,7 @@ export default function RecruiterRegisterPage() {
             <p className="mt-5 text-[11px] font-bold text-slate-500">
               {emailResendTimer > 0 ? (
                 <>
-                  Didn't receive it? Resend in{" "}
+                  Didn&apos;t receive it? Resend in{" "}
                   <span className="text-purple-600 font-extrabold">
                     00:{emailResendTimer < 10 ? `0${emailResendTimer}` : emailResendTimer}
                   </span>

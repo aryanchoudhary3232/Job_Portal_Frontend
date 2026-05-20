@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export function AuthShell({
@@ -9,7 +9,6 @@ export function AuthShell({
   stickerTitle,
   stickerSubtitle,
   stickerImage,
-  stickerCta,
   compact,
   topRightLink,
   children,
@@ -20,13 +19,11 @@ export function AuthShell({
   stickerTitle?: string;
   stickerSubtitle?: string;
   stickerImage?: string;
-  stickerCta?: string;
   compact?: boolean;
   topRightLink?: React.ReactNode;
   children: ReactNode;
 }) {
   const panelPadding = compact ? "p-10" : "p-14";
-  const contentPadding = compact ? "py-6" : "py-10";
   const sticker = stickerImage ? (
     <div className="flex w-full items-center justify-center">
       {/* Fixed-size box — illustration never grows beyond this */}
@@ -34,9 +31,11 @@ export function AuthShell({
         style={{ width: 340, height: 340, flexShrink: 0 }}
         className="flex items-center justify-center overflow-hidden"
       >
-        <img
+        <Image
           src={stickerImage}
           alt={stickerTitle || "NCRJobs mascot"}
+          width={340}
+          height={340}
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
           className="drop-shadow-[0_35px_80px_rgba(20,9,60,0.45)]"
         />
@@ -46,6 +45,12 @@ export function AuthShell({
 
   return (
     <div className="relative h-screen overflow-hidden page-shell">
+      <div className="sr-only">
+        <p>{eyebrow}</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        {stickerSubtitle ? <p>{stickerSubtitle}</p> : null}
+      </div>
       {/* Ambient blobs */}
       <div className="fixed -top-24 -left-24 -z-10 h-96 w-96 rounded-full bg-[rgba(195,192,255,0.2)] blur-3xl" />
       <div className="fixed -bottom-24 -right-24 -z-10 h-96 w-96 rounded-full bg-[rgba(79,70,229,0.16)] blur-3xl" />
@@ -111,7 +116,13 @@ export function AuthShell({
           <div className={`w-full max-w-md ${compact ? "py-6" : "py-10"}`}>
             {/* Top bar: logo left, switch link right — same row */}
             <div className="hidden lg:flex items-center justify-between mb-8">
-              <img src="/logo-wordmark.svg" alt="NCRJobs" className="h-11 w-auto" />
+              <Image
+                src="/logo-wordmark.svg"
+                alt="NCRJobs"
+                width={180}
+                height={44}
+                className="h-11 w-auto"
+              />
               {topRightLink && (
                 <div
                   className="rounded-full px-4 py-2 text-sm"

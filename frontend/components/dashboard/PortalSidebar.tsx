@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
@@ -12,7 +13,7 @@ export function PortalSidebar({ role, user }: { role: Role; user: User | null })
   return (
     <aside className="hidden w-[240px] shrink-0 border-r border-white/70 bg-white/70 px-5 py-7 shadow-[0_20px_60px_rgba(35,28,78,0.08)] backdrop-blur-xl xl:block">
       <div>
-        <img src="/logo-wordmark.svg" alt="NCRJobs" className="h-9 w-auto" />
+        <Image src="/logo-wordmark.svg" alt="NCRJobs" width={160} height={36} className="h-9 w-auto" />
         <div className="mt-2 text-[10px] font-black uppercase tracking-[0.22em] text-[var(--on-surface-variant)]">{role.toLowerCase()} workspace</div>
       </div>
       <div className="mt-8 rounded-[22px] bg-white/90 p-4 shadow-[0_18px_40px_rgba(35,28,78,0.08)] ring-1 ring-[var(--outline-variant)]">

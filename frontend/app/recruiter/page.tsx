@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function RecruiterEntryPage() {
@@ -10,7 +11,7 @@ export default function RecruiterEntryPage() {
     {
       number: "02",
       title: "Get AI-Matched Talent",
-      description: "Our system filters through Delhi NCR's top university pools and serves verified match lists instantly.",
+      description: "Our system filters through Delhi NCR&apos;s top university pools and serves verified match lists instantly.",
     },
     {
       number: "03",
@@ -63,7 +64,7 @@ export default function RecruiterEntryPage() {
       <header className="border-b border-[#ebdfff] bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <img src="/logo.svg" alt="NCRJobs" className="h-9 w-9 animate-pulse" />
+            <Image src="/logo.svg" alt="NCRJobs" width={36} height={36} className="h-9 w-9 animate-pulse" />
             <span className="text-lg font-black tracking-tight text-[#3b1078] font-display">NCRJobs Recruiter</span>
           </Link>
           <div className="flex items-center gap-3">
@@ -95,7 +96,7 @@ export default function RecruiterEntryPage() {
                 🚀 Elevate your talent sourcing
               </span>
               <h1 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.08] font-display">
-                Delhi NCR's Leading <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6c2bd9] to-[#4c1d95]">Recruiter Panel</span>.
+                Delhi NCR&apos;s Leading <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6c2bd9] to-[#4c1d95]">Recruiter Panel</span>.
               </h1>
               <p className="text-lg text-slate-500 leading-relaxed max-w-xl font-medium">
                 Connect directly with OTP-verified talents and manage placements through a fully integrated company dashboard. Zero upfront fee.

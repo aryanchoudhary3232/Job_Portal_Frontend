@@ -36,8 +36,23 @@ export type Application = {
   stage: string;
   note: string;
   appliedAt: string;
+  resumeFileName?: string;
+  resumeMimeType?: string;
+  resumeData?: string;
+  details?: {
+    phone?: string;
+    college?: string;
+    degree?: string;
+    graduationYear?: string;
+    experience?: string;
+    portfolioUrl?: string;
+    linkedinUrl?: string;
+    expectedSalary?: string;
+    availability?: string;
+  };
   job?: Job;
   student?: User;
+  recruiter?: User;
 };
 
 export type ApiResponse<T> = {

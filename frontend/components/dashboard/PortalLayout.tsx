@@ -3,7 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { roleRouteMap } from "@/lib/session";
+import { roleLoginRouteMap, roleRouteMap } from "@/lib/session";
 import type { Role, User } from "@/lib/types";
 import { PageState } from "./PageState";
 import { PortalHeader } from "./PortalHeader";
@@ -34,7 +34,7 @@ export function PortalLayout({
       })
       .catch((response) => {
         setError(response instanceof Error ? response.message : "Session expired");
-        router.replace("/login");
+        router.replace(roleLoginRouteMap[role]);
       })
       .finally(() => setLoading(false));
   }, [role, router]);

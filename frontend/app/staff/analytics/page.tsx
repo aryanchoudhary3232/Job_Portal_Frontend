@@ -5,6 +5,7 @@ import { api } from "@/lib/api";
 import { PortalLayout } from "@/components/dashboard/PortalLayout";
 import { PageState } from "@/components/dashboard/PageState";
 import { Panel } from "@/components/dashboard/Panel";
+import { stageLabel } from "@/lib/application-stages";
 
 type Analytics = {
   jobsByMode: Array<{ label: string; value: number }>;
@@ -29,8 +30,8 @@ export default function StaffAnalyticsPage() {
             <Panel title="Jobs by work mode">
               <ChartList rows={data.jobsByMode} />
             </Panel>
-            <Panel title="Applications by stage">
-              <ChartList rows={data.applicationsByStage} />
+            <Panel title="Applications by status" subtitle="Stage-wise breakdown of applied, shortlisted, selected, and rejected candidates.">
+              <ChartList rows={data.applicationsByStage.map((row) => ({ ...row, label: stageLabel(row.label) }))} />
             </Panel>
           </div>
         ) : null}

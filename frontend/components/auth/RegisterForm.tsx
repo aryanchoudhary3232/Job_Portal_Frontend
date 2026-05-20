@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
@@ -11,7 +12,6 @@ export function RegisterForm() {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   // Wizard Step: 1 = Mobile OTP, 2 = Basic Details (+ Email OTP), 3 = Congratulations
   const [step, setStep] = useState(1);
@@ -219,7 +219,7 @@ export function RegisterForm() {
         {step < 3 && (
           <div>
             <div className="lg:hidden">
-              <img src="/logo-wordmark.svg" alt="NCRJobs" className="h-10 w-auto" />
+              <Image src="/logo-wordmark.svg" alt="NCRJobs" width={160} height={40} className="h-10 w-auto" />
             </div>
             <p className="mt-4 text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Student registration</p>
             <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[var(--on-surface)] font-display">
@@ -239,7 +239,6 @@ export function RegisterForm() {
         )}
 
         {error ? <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">{error}</p> : null}
-        {success ? <p className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">{success}</p> : null}
 
         {/* ══════════════════ STEP 1: MOBILE OTP ══════════════════ */}
         {step === 1 && (

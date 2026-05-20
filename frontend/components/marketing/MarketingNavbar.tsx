@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const links = [
@@ -10,7 +11,7 @@ export function MarketingNavbar() {
     <header className="sticky top-0 z-40 w-full bg-white/70 shadow-[0_12px_30px_rgba(44,22,84,0.08)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <img src="/logo.svg" alt="NCRJobs" className="h-10 w-10" />
+          <Image src="/logo.svg" alt="NCRJobs" width={40} height={40} className="h-10 w-10" />
           <span className="text-lg font-black tracking-tight text-[var(--on-surface)] font-display">NCRJobs</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-semibold text-[var(--on-surface-variant)] md:flex">

@@ -1,4 +1,4 @@
-import type { User } from "./types";
+import type { Role, User } from "./types";
 
 const tokenKey = "jobportal_token";
 const userKey = "jobportal_user";
@@ -27,4 +27,10 @@ export const roleRouteMap = {
   STUDENT: "/student",
   RECRUITER: "/recruiter/dashboard",
   STAFF: "/staff",
+};
+
+export const roleLoginRouteMap: Record<Role, string> = {
+  STUDENT: "/login",
+  RECRUITER: "/recruiter/login",
+  STAFF: "/staff/login",
 };

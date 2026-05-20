@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = [
@@ -14,7 +15,7 @@ const footerLinks = [
     items: [
       { label: "Recruiter login", href: "/login" },
       { label: "For recruiters", href: "/recruiter" },
-      { label: "Admin access", href: "/staff" },
+      { label: "Admin sign in", href: "/staff/login" },
     ],
   },
   {
@@ -33,7 +34,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/logo.svg" alt="NCRJobs" className="h-10 w-10" />
+            <Image src="/logo.svg" alt="NCRJobs" width={40} height={40} className="h-10 w-10" />
             <span className="text-lg font-black tracking-tight text-[var(--on-surface)] font-display">NCRJobs</span>
           </div>
           <p className="mt-4 text-sm leading-6 text-[var(--on-surface-variant)]">
