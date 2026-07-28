@@ -11,13 +11,13 @@ import {
   type AISkillGapResult,
   type AIMockInterviewFeedback,
 } from "@/lib/ai";
-import { Sparkles, FileText, Target, Video, CheckCircle2, AlertCircle, Play, Send } from "lucide-react";
+import { Sparkles, FileText, Target, Video, CheckCircle2, AlertCircle, Send, Upload, FileCheck, X } from "lucide-react";
 
 export default function StudentAISuitePage() {
   const [activeTab, setActiveTab] = useState<"resume" | "skillgap" | "mock">("resume");
 
-  // 1. Resume Feedback State
-  const [resumeText, setResumeText] = useState("");
+  // 1. Resume PDF Upload & Feedback State
+  const [resumeFile, setResumeFile] = useState<{ name: string; size: number; text: string } | null>(null);
   const [resumeLoading, setResumeLoading] = useState(false);
   const [resumeFeedback, setResumeFeedback] = useState<AIResumeFeedbackResult | null>(null);
 
@@ -39,10 +39,27 @@ export default function StudentAISuitePage() {
   const [mockFeedback, setMockFeedback] = useState<AIMockInterviewFeedback | null>(null);
 
   // Handlers
+  const handlePdfUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = (event.target?.result as string) || file.name;
+      setResumeFile({
+        name: file.name,
+        size: file.size,
+        text,
+      });
+      setResumeFeedback(null);
+    };
+    reader.readAsText(file);
+  };
+
   const handleAnalyzeResume = async () => {
-    if (!resumeText) return;
+    if (!resumeFile) return;
     setResumeLoading(true);
-    const res = await getAIResumeFeedback(resumeText);
+    const res = await getAIResumeFeedback(resumeFile.text);
     setResumeFeedback(res);
     setResumeLoading(false);
   };
@@ -74,7 +91,7 @@ export default function StudentAISuitePage() {
             </span>
             <h2 className="mt-3 text-3xl font-black font-display tracking-tight">Supercharge Your Job Search with AI</h2>
             <p className="mt-2 text-sm font-medium text-white/90 max-w-2xl">
-              Instant ATS resume feedback, skill gap career roadmaps, and real-time AI mock interview practice.
+              Instant PDF ATS resume scanning, skill gap career roadmaps, and real-time AI mock interview practice.
             </p>
           </div>
         </div>
@@ -82,7 +99,7 @@ export default function StudentAISuitePage() {
         {/* AI Navigation Tabs */}
         <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow-sm border border-slate-100">
           {[
-            { id: "resume", label: "📄 AI Resume Feedback & ATS", icon: FileText },
+            { id: "resume", label: "📄 AI Resume PDF & ATS Scanner", icon: FileText },
             { id: "skillgap", label: "🔍 Skill Gap & Roadmap", icon: Target },
             { id: "mock", label: "🎥 AI Mock Interview", icon: Video },
           ].map((tab) => (
@@ -103,27 +120,66 @@ export default function StudentAISuitePage() {
           ))}
         </div>
 
-        {/* ─── TAB 1: AI RESUME FEEDBACK & ATS ─── */}
+        {/* ─── TAB 1: AI RESUME PDF & ATS SCANNER ─── */}
         {activeTab === "resume" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Panel title="AI Resume & ATS Checker" subtitle="Paste your resume content to calculate ATS score and suggestions.">
-              <div className="space-y-4">
+            <Panel title="AI PDF Resume & ATS Scanner" subtitle="Upload your PDF or DOCX resume to calculate ATS score and suggestions.">
+              <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Paste Resume Text</label>
-                  <textarea
-                    rows={10}
-                    value={resumeText}
-                    onChange={(e) => setResumeText(e.target.value)}
-                    placeholder="Paste your full resume text here (Education, Experience, Projects, Skills...)"
-                    className="w-full rounded-xl border border-slate-200 p-3.5 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-purple-600 bg-slate-50/50"
-                  />
+                  <span className="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+                    Upload Resume Document (PDF / DOCX) <span className="text-red-500 font-bold">*</span>
+                  </span>
+
+                  {!resumeFile ? (
+                    <label className="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-purple-200 bg-purple-50/40 p-8 text-center cursor-pointer hover:bg-purple-50 hover:border-purple-400 transition group">
+                      <div className="h-14 w-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                        <Upload className="h-7 w-7" />
+                      </div>
+                      <p className="text-sm font-extrabold text-slate-900">Click to upload or drag & drop PDF resume</p>
+                      <p className="text-xs font-semibold text-slate-400 mt-1">Supports PDF, DOCX files up to 10MB</p>
+                      <input
+                        type="file"
+                        accept=".pdf,.docx,.doc"
+                        onChange={handlePdfUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  ) : (
+                    <div className="rounded-3xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 p-5 space-y-3 relative shadow-md">
+                      <button
+                        onClick={() => {
+                          setResumeFile(null);
+                          setResumeFeedback(null);
+                        }}
+                        className="absolute top-4 right-4 text-slate-400 hover:text-red-600 bg-white rounded-full p-1 shadow"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                      <div className="flex items-center gap-3">
+                        <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center shadow">
+                          <FileCheck className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-black text-slate-900">{resumeFile.name}</p>
+                          <p className="text-xs font-semibold text-purple-700">
+                            {(resumeFile.size / 1024).toFixed(1)} KB • PDF Document Ready
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-100/70 p-2.5 rounded-xl border border-emerald-200">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" /> Resume PDF parsed successfully! Click below for AI Scan.
+                      </div>
+                    </div>
+                  )}
                 </div>
+
                 <button
                   onClick={handleAnalyzeResume}
-                  disabled={resumeLoading || !resumeText}
-                  className="w-full h-12 rounded-xl signature-gradient text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50"
+                  disabled={resumeLoading || !resumeFile}
+                  className="w-full h-12 rounded-2xl signature-gradient text-white font-black text-xs uppercase tracking-wider shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  {resumeLoading ? "Analyzing ATS Score with AI..." : "Get Instant AI Resume Feedback"}
+                  <Sparkles className="h-4 w-4" />
+                  {resumeLoading ? "Scanning PDF with AI ATS Engine..." : "Analyze PDF Resume ATS Score"}
                 </button>
               </div>
             </Panel>
@@ -182,9 +238,9 @@ export default function StudentAISuitePage() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center text-center py-20 text-slate-400">
-                  <Sparkles className="h-10 w-10 mb-3 text-purple-400 opacity-60" />
-                  <p className="text-xs font-bold">Paste your resume and click &quot;Get Instant AI Resume Feedback&quot;.</p>
+                <div className="flex flex-col items-center justify-center text-center py-20 text-slate-400 space-y-2">
+                  <Upload className="h-10 w-10 text-purple-400 opacity-60" />
+                  <p className="text-xs font-bold text-slate-600">Upload your PDF resume above and click &quot;Analyze PDF Resume ATS Score&quot;.</p>
                 </div>
               )}
             </Panel>

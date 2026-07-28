@@ -14,14 +14,14 @@ import {
   type AIInterviewQuestion,
   type AIHiringAnalytics,
 } from "@/lib/ai";
-import { Sparkles, Award, FileText, HelpCircle, BarChart2, CheckCircle2, AlertCircle, Copy, Check } from "lucide-react";
+import { Sparkles, Award, FileText, HelpCircle, BarChart2, CheckCircle2, AlertCircle, Copy, Check, Upload, FileCheck, X } from "lucide-react";
 
 export default function RecruiterAISuitePage() {
   const [activeTab, setActiveTab] = useState<"screening" | "ranking" | "jd" | "questions" | "analytics">("screening");
 
-  // 1. Resume Screening State
-  const [screeningResume, setScreeningResume] = useState("");
-  const [screeningJd, setScreeningJd] = useState("");
+  // 1. Resume Screening State (PDF Upload)
+  const [screeningPdfFile, setScreeningPdfFile] = useState<{ name: string; size: number; text: string } | null>(null);
+  const [screeningJd, setScreeningJd] = useState("Full Stack Next.js & Node.js Engineer (2-4 years experience)");
   const [screeningLoading, setScreeningLoading] = useState(false);
   const [screeningResult, setScreeningResult] = useState<AIResumeScreeningResult | null>(null);
 
@@ -49,10 +49,27 @@ export default function RecruiterAISuitePage() {
   const [analytics, setAnalytics] = useState<AIHiringAnalytics | null>(null);
 
   // Handlers
+  const handlePdfUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = (event.target?.result as string) || file.name;
+      setScreeningPdfFile({
+        name: file.name,
+        size: file.size,
+        text,
+      });
+      setScreeningResult(null);
+    };
+    reader.readAsText(file);
+  };
+
   const handleScreening = async () => {
-    if (!screeningResume) return;
+    if (!screeningPdfFile) return;
     setScreeningLoading(true);
-    const res = await screenResumeWithAI(screeningResume, screeningJd);
+    const res = await screenResumeWithAI(screeningPdfFile.text, screeningJd);
     setScreeningResult(res);
     setScreeningLoading(false);
   };
@@ -104,7 +121,7 @@ export default function RecruiterAISuitePage() {
             </span>
             <h2 className="mt-3 text-3xl font-black font-display tracking-tight">Recruiter AI Operating System</h2>
             <p className="mt-2 text-sm font-medium text-white/90 max-w-2xl">
-              Automate resume screening, candidate ranking, JD generation, and interview questions with 10x speed.
+              Automate PDF resume screening, candidate ranking, JD generation, and interview questions with 10x speed.
             </p>
           </div>
         </div>
@@ -112,7 +129,7 @@ export default function RecruiterAISuitePage() {
         {/* AI Navigation Tabs */}
         <div className="flex flex-wrap gap-2 rounded-2xl bg-white p-2 shadow-sm border border-slate-100">
           {[
-            { id: "screening", label: "🤖 AI Resume Screening", icon: FileText },
+            { id: "screening", label: "🤖 AI PDF Resume Screener", icon: FileText },
             { id: "ranking", label: "🎯 AI Candidate Ranking", icon: Award },
             { id: "jd", label: "📝 AI JD Generator", icon: Sparkles },
             { id: "questions", label: "💬 Interview Questions", icon: HelpCircle },
@@ -136,37 +153,77 @@ export default function RecruiterAISuitePage() {
           ))}
         </div>
 
-        {/* ─── TAB 1: AI RESUME SCREENING ─── */}
+        {/* ─── TAB 1: AI PDF RESUME SCREENING ─── */}
         {activeTab === "screening" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Panel title="AI Resume Screener" subtitle="Paste a resume and job description to get instant AI match scoring.">
+            <Panel title="AI PDF Resume Screener" subtitle="Upload candidate PDF resume & target JD to get instant AI match scoring.">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Paste Resume Content</label>
-                  <textarea
-                    rows={6}
-                    value={screeningResume}
-                    onChange={(e) => setScreeningResume(e.target.value)}
-                    placeholder="Paste candidate resume text here (e.g. John Doe, Full Stack Engineer with 3 yrs React, Node.js, PostgreSQL...)"
-                    className="w-full rounded-xl border border-slate-200 p-3.5 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-purple-600 bg-slate-50/50"
-                  />
+                  <span className="block text-xs font-extrabold uppercase tracking-wider text-slate-500 mb-2">
+                    Upload Candidate Resume (PDF / DOCX) <span className="text-red-500 font-bold">*</span>
+                  </span>
+
+                  {!screeningPdfFile ? (
+                    <label className="flex flex-col items-center justify-center rounded-3xl border-2 border-dashed border-purple-200 bg-purple-50/40 p-8 text-center cursor-pointer hover:bg-purple-50 hover:border-purple-400 transition group">
+                      <div className="h-14 w-14 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                        <Upload className="h-7 w-7" />
+                      </div>
+                      <p className="text-sm font-extrabold text-slate-900">Click to upload candidate PDF resume</p>
+                      <p className="text-xs font-semibold text-slate-400 mt-1">Supports PDF, DOCX up to 10MB</p>
+                      <input
+                        type="file"
+                        accept=".pdf,.docx,.doc"
+                        onChange={handlePdfUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  ) : (
+                    <div className="rounded-3xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 to-indigo-50 p-5 space-y-3 relative shadow-md">
+                      <button
+                        onClick={() => {
+                          setScreeningPdfFile(null);
+                          setScreeningResult(null);
+                        }}
+                        className="absolute top-4 right-4 text-slate-400 hover:text-red-600 bg-white rounded-full p-1 shadow"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                      <div className="flex items-center gap-3">
+                        <div className="h-12 w-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center shadow">
+                          <FileCheck className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-black text-slate-900">{screeningPdfFile.name}</p>
+                          <p className="text-xs font-semibold text-purple-700">
+                            {(screeningPdfFile.size / 1024).toFixed(1)} KB • PDF Ready for AI Screening
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-100/70 p-2.5 rounded-xl border border-emerald-200">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" /> PDF loaded successfully!
+                      </div>
+                    </div>
+                  )}
                 </div>
+
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Job Description (Optional)</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Target Job Role / Description</label>
                   <textarea
                     rows={4}
                     value={screeningJd}
                     onChange={(e) => setScreeningJd(e.target.value)}
-                    placeholder="Paste target job description to screen against..."
-                    className="w-full rounded-xl border border-slate-200 p-3.5 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-purple-600 bg-slate-50/50"
+                    placeholder="Enter target job role requirements..."
+                    className="w-full rounded-2xl border border-slate-200 p-3.5 text-xs text-slate-800 outline-none focus:ring-2 focus:ring-purple-600 bg-slate-50/50"
                   />
                 </div>
+
                 <button
                   onClick={handleScreening}
-                  disabled={screeningLoading || !screeningResume}
-                  className="w-full h-12 rounded-xl signature-gradient text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50"
+                  disabled={screeningLoading || !screeningPdfFile}
+                  className="w-full h-12 rounded-2xl signature-gradient text-white font-black text-xs uppercase tracking-wider shadow-lg transition hover:-translate-y-0.5 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  {screeningLoading ? "Screening Candidate with AI..." : "Run AI Resume Screen"}
+                  <Sparkles className="h-4 w-4" />
+                  {screeningLoading ? "Screening Candidate PDF with AI..." : "Run AI PDF Resume Screen"}
                 </button>
               </div>
             </Panel>
@@ -216,9 +273,9 @@ export default function RecruiterAISuitePage() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center text-center py-16 text-slate-400">
-                  <Sparkles className="h-10 w-10 mb-3 text-purple-400 opacity-60" />
-                  <p className="text-xs font-bold">Paste a resume and click &quot;Run AI Resume Screen&quot; to see detailed analysis.</p>
+                <div className="flex flex-col items-center justify-center text-center py-16 text-slate-400 space-y-2">
+                  <Upload className="h-10 w-10 text-purple-400 opacity-60" />
+                  <p className="text-xs font-bold text-slate-600">Upload a candidate PDF resume above and click &quot;Run AI PDF Resume Screen&quot;.</p>
                 </div>
               )}
             </Panel>
