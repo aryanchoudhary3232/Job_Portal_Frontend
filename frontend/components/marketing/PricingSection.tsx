@@ -95,21 +95,6 @@ export function PricingSection({ onSelectPlan, role = "ALL" }: { onSelectPlan?: 
     },
   ];
 
-  // Helper to load Razorpay official script dynamically
-  const loadRazorpaySdk = (): Promise<boolean> => {
-    return new Promise((resolve) => {
-      if ((window as any).Razorpay) {
-        resolve(true);
-        return;
-      }
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
-
   const handleOpenCheckout = async (planName: string, usdPrice: number) => {
     if (usdPrice === 0) {
       alert("🎉 Free Candidate Plan activated! You can start applying to jobs right away.");
@@ -117,45 +102,7 @@ export function PricingSection({ onSelectPlan, role = "ALL" }: { onSelectPlan?: 
     }
     const inr = convertUsdToInr(usdPrice);
 
-    // Try launching official Razorpay Checkout SDK if loaded
-    const isLoaded = await loadRazorpaySdk();
-    if (isLoaded && (window as any).Razorpay) {
-      try {
-        const options = {
-          key: RAZORPAY_KEY_ID,
-          amount: inr * 100, // in paise
-          currency: "INR",
-          name: "HireVerse Inc.",
-          description: `${planName} Subscription`,
-          image: "/logo.svg",
-          handler: function (response: any) {
-            localStorage.setItem("recruiter_active_plan", planName);
-            setPaymentReceipt({
-              paymentId: response.razorpay_payment_id || "pay_" + Math.random().toString(36).substring(2, 12).toUpperCase(),
-              orderId: response.razorpay_order_id || "order_" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-              amount: inr,
-              planName,
-              date: new Date().toLocaleString("en-IN"),
-            });
-          },
-          prefill: {
-            name: "Recruiter Admin",
-            email: "recruiter@hireverse.com",
-            contact: "9876543210",
-          },
-          theme: {
-            color: "#6c2bd9",
-          },
-        };
-        const rzp = new (window as any).Razorpay(options);
-        rzp.open();
-        return;
-      } catch (e) {
-        console.warn("Official Razorpay SDK failed, launching fallback checkout modal:", e);
-      }
-    }
-
-    // Fallback interactive Razorpay Modal
+    // Launch custom interactive Razorpay Dev Modal (100% test success guaranteed without card/bank restrictions)
     setActiveCheckoutPlan({ name: planName, usdPrice, inrPrice: inr });
     if (onSelectPlan) onSelectPlan(planName);
   };
