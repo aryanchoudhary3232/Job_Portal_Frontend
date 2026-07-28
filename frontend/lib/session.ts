@@ -27,10 +27,12 @@ export const roleRouteMap: Record<Role, string> = {
   STUDENT: "/student",
   RECRUITER: "/recruiter/dashboard",
   ADMIN: "/admin",
+  STAFF: "/staff/analytics",
 };
 
 export const roleLoginRouteMap: Record<Role, string> = {
   STUDENT: "/login",
   RECRUITER: "/recruiter/login",
   ADMIN: "/admin/login",
+  STAFF: "/login",
 };

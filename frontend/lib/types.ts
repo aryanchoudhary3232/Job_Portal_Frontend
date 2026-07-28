@@ -1,9 +1,10 @@
-export type Role = "STUDENT" | "RECRUITER" | "ADMIN";
+export type Role = "STUDENT" | "RECRUITER" | "ADMIN" | "STAFF";
 
 export type User = {
   id: string;
   fullName: string;
   email: string;
+  phone?: string;
   role: Role;
   headline?: string;
   location?: string;
@@ -36,20 +37,14 @@ export type Application = {
   stage: string;
   note: string;
   appliedAt: string;
+  createdAt?: string;
+  jobTitle?: string;
+  companyName?: string;
+  applicantName?: string;
   resumeFileName?: string;
   resumeMimeType?: string;
   resumeData?: string;
-  details?: {
-    phone?: string;
-    college?: string;
-    degree?: string;
-    graduationYear?: string;
-    experience?: string;
-    portfolioUrl?: string;
-    linkedinUrl?: string;
-    expectedSalary?: string;
-    availability?: string;
-  };
+  details?: any;
   job?: Job;
   student?: User;
   recruiter?: User;

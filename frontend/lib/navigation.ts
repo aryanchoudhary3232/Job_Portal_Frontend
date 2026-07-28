@@ -27,4 +27,7 @@ export const navigation = {
     { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
     { href: "/admin/settings", label: "Settings", icon: Settings },
   ],
+  STAFF: [
+    { href: "/staff/analytics", label: "Analytics", icon: BarChart3 },
+  ],
 };
