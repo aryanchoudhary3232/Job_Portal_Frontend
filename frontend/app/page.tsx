@@ -1,5 +1,6 @@
 import { Hero } from "@/components/marketing/Hero";
 import { MarketingNavbar } from "@/components/marketing/MarketingNavbar";
+import { PricingSection } from "@/components/marketing/PricingSection";
 import { SalaryInsights } from "@/components/marketing/SalaryInsights";
 import { SiteFooter } from "@/components/marketing/SiteFooter";
 import { TopCompaniesStrip } from "@/components/marketing/TopCompaniesStrip";
@@ -12,6 +13,7 @@ export default function LandingPage() {
       <main className="mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-12 pt-8 sm:px-6 lg:px-8">
         <Hero />
         <TrendingJobs />
+        <PricingSection />
         <TopCompaniesStrip />
         <SalaryInsights />
       </main>

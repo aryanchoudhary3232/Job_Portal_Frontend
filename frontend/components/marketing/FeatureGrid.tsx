@@ -1,5 +1,5 @@
 const features = [
-  ["Student-first listings", "Internships and entry roles curated for NCR students."],
+  ["Student-first listings", "Internships and entry roles curated for students."],
   ["Clean application tracker", "Know exactly where you stand at every stage."],
   ["Verified recruiters", "Apply with confidence to approved companies."],
 ];
@@ -9,7 +9,7 @@ export function FeatureGrid() {
     <section className="glass-effect rounded-[40px] px-6 py-10 shadow-[0_20px_60px_rgba(35,28,78,0.08)] ring-1 ring-[var(--outline-variant)] md:px-10">
       <div className="mb-10 text-center">
         <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[var(--primary)]">Capabilities</p>
-        <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-[var(--on-surface)] md:text-5xl font-display">Everything you need to run the NCR hiring flow well.</h2>
+        <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-[var(--on-surface)] md:text-5xl font-display">Everything you need to run the hiring flow well.</h2>
       </div>
       <div className="grid gap-5 lg:grid-cols-3">
         {features.map(([title, text], index) => (

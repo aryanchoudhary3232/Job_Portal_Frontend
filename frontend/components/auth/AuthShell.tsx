@@ -33,7 +33,7 @@ export function AuthShell({
       >
         <Image
           src={stickerImage}
-          alt={stickerTitle || "NCRJobs mascot"}
+          alt={stickerTitle || "HireVerse mascot"}
           width={340}
           height={340}
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
@@ -118,7 +118,7 @@ export function AuthShell({
             <div className="hidden lg:flex items-center justify-between mb-8">
               <Image
                 src="/logo-wordmark.svg"
-                alt="NCRJobs"
+                alt="HireVerse"
                 width={180}
                 height={44}
                 className="h-11 w-auto"

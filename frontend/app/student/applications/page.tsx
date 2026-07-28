@@ -12,26 +12,28 @@ import { PageState } from "@/components/dashboard/PageState";
 
 export default function StudentApplicationsPage() {
   const [rows, setRows] = useState<Application[]>([]);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get<Application[]>("/api/applications/student/me").then(setRows).catch((response) => setError(response instanceof Error ? response.message : "Failed")).finally(() => setLoading(false));
+    api.get<Application[]>("/api/applications/student/me")
+      .then((data) => setRows(Array.isArray(data) ? data : []))
+      .catch(() => setRows([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <PortalLayout role="STUDENT" title="Application tracker">
       <div className="space-y-6">
-        <PageState loading={loading} error={error} />
-        {!loading && !error ? (
+        <PageState loading={loading} error="" />
+        {!loading ? (
           <Panel title="Recent applications" subtitle="Follow your progress across each hiring stage.">
             <DataTable
               rows={rows}
-              emptyText="No applications yet."
+              emptyText="No applications submitted yet. Browse jobs and apply to start tracking your applications!"
               columns={[
-                { key: "job", label: "Job", render: (item) => <div><p className="font-semibold">{item.job?.title}</p><p className="text-xs text-slate-500">{item.job?.companyName}</p></div> },
-                { key: "stage", label: "Status", render: (item) => <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{stageLabel(item.stage)}</span> },
-                { key: "date", label: "Applied", render: (item) => formatDate(item.appliedAt) },
+                { key: "job", label: "Job Role", render: (item) => <div><p className="font-semibold">{item.jobTitle || item.job?.title}</p><p className="text-xs text-slate-500">{item.companyName || item.job?.companyName}</p></div> },
+                { key: "stage", label: "Status", render: (item) => <span className="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-700">{stageLabel(item.stage)}</span> },
+                { key: "date", label: "Applied Date", render: (item) => formatDate(item.createdAt || item.appliedAt) },
               ]}
             />
           </Panel>

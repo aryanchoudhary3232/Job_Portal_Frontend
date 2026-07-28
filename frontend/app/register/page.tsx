@@ -7,7 +7,7 @@ export default function RegisterPage() {
     <AuthShell
       eyebrow="Student register"
       title="Create your student profile in minutes."
-      description="Apply to NCR internships and entry roles with a verified student profile."
+      description="Apply to internships and entry roles with a verified student profile."
       stickerTitle="Student profile"
       stickerSubtitle="Start applying to verified student openings right away."
       stickerImage="/auth-register-illustration.svg"

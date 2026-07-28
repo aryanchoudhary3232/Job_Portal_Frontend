@@ -11,7 +11,7 @@ export default function RecruiterEntryPage() {
     {
       number: "02",
       title: "Get AI-Matched Talent",
-      description: "Our system filters through Delhi NCR&apos;s top university pools and serves verified match lists instantly.",
+      description: "Our system filters through top university pools and serves verified match lists instantly.",
     },
     {
       number: "03",
@@ -43,7 +43,7 @@ export default function RecruiterEntryPage() {
     },
     {
       icon: "🏛️",
-      title: "NCR University Networks",
+      title: "University Networks",
       description: "Target candidates across premier engineering and business colleges in Delhi, Noida, and Gurgaon.",
     },
     {
@@ -64,8 +64,8 @@ export default function RecruiterEntryPage() {
       <header className="border-b border-[#ebdfff] bg-white/80 backdrop-blur-md sticky top-0 z-50">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="NCRJobs" width={36} height={36} className="h-9 w-9 animate-pulse" />
-            <span className="text-lg font-black tracking-tight text-[#3b1078] font-display">NCRJobs Recruiter</span>
+            <Image src="/logo.svg" alt="HireVerse" width={36} height={36} className="h-9 w-9 animate-pulse" />
+            <span className="text-lg font-black tracking-tight text-[#3b1078] font-display">HireVerse Recruiter</span>
           </Link>
           <div className="flex items-center gap-3">
             <Link
@@ -96,7 +96,7 @@ export default function RecruiterEntryPage() {
                 🚀 Elevate your talent sourcing
               </span>
               <h1 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.08] font-display">
-                Delhi NCR&apos;s Leading <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6c2bd9] to-[#4c1d95]">Recruiter Panel</span>.
+                India&apos;s Leading <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6c2bd9] to-[#4c1d95]">Recruiter Panel</span>.
               </h1>
               <p className="text-lg text-slate-500 leading-relaxed max-w-xl font-medium">
                 Connect directly with OTP-verified talents and manage placements through a fully integrated company dashboard. Zero upfront fee.
@@ -125,7 +125,7 @@ export default function RecruiterEntryPage() {
                 </div>
                 <div>
                   <p className="text-4xl font-black text-[#3b1078]">1,200+</p>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">NCR Tech Partners</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">Tech Partners</p>
                 </div>
                 <div>
                   <p className="text-4xl font-black text-[#3b1078]">99.2%</p>
@@ -155,7 +155,7 @@ export default function RecruiterEntryPage() {
                   <div className="flex items-center justify-between bg-purple-50/50 rounded-2xl p-4 border border-purple-100/60">
                     <div>
                       <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Company Registered</h4>
-                      <p className="text-sm font-extrabold text-slate-800 mt-1">NCRTech Solutions Private Limited</p>
+                      <p className="text-sm font-extrabold text-slate-800 mt-1">TechNova Solutions Private Limited</p>
                       <p className="text-[10px] font-semibold text-slate-500">Startup • 11-50 Employees</p>
                     </div>
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 text-sm">🏢</span>
@@ -197,7 +197,7 @@ export default function RecruiterEntryPage() {
           </div>
         </section>
 
-        {/* Section: How NCRJobs Recruiter Works */}
+        {/* Section: How HireVerse Recruiter Works */}
         <section className="py-20 px-6 max-w-7xl mx-auto border-t border-purple-100">
           <div className="text-center space-y-3 mb-16">
             <span className="text-xs font-extrabold uppercase tracking-[0.25em] text-[#6c2bd9]">Simplifying Sourcing</span>
@@ -229,7 +229,7 @@ export default function RecruiterEntryPage() {
               <span className="text-xs font-extrabold uppercase tracking-[0.3em] text-purple-400">Robust Toolset</span>
               <h2 className="text-4xl font-black tracking-tight font-display text-white">Full-Suite Recruiter Features</h2>
               <p className="text-sm text-white/60 font-semibold max-w-md mx-auto">
-                Discover why hundreds of tech enterprises and dynamic startups in NCR choose our unified hiring workspace.
+                Discover why hundreds of tech enterprises and dynamic startups choose our unified hiring workspace.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ export default function RecruiterEntryPage() {
         {/* Section: Risk-Free Recruitment Promise */}
         <section className="py-20 px-6 max-w-5xl mx-auto text-center space-y-6">
           <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-50 border border-purple-100 text-xl">🛡️</div>
-          <h2 className="text-4xl font-black text-slate-900 tracking-tight font-display">The NCRJobs Post-Placement Guarantee</h2>
+          <h2 className="text-4xl font-black text-slate-900 tracking-tight font-display">The HireVerse Post-Placement Guarantee</h2>
           <p className="text-sm font-semibold text-slate-400 leading-relaxed max-w-xl mx-auto">
             Our placement commission setup protects recruiters. Since staff tracks selections dynamically, you pay zero upfront setup, database search, or posting fees. Complete premium access remains active from day one!
           </p>
@@ -272,10 +272,10 @@ export default function RecruiterEntryPage() {
       <footer className="border-t border-[#ebdfff] bg-white py-8 text-center text-xs font-semibold text-slate-400">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="NCRJobs" className="h-6 w-6" />
-            <span className="font-extrabold text-[#3b1078]">NCRJobs Recruiter Portal</span>
+            <img src="/logo.svg" alt="HireVerse" className="h-6 w-6" />
+            <span className="font-extrabold text-[#3b1078]">HireVerse Recruiter Portal</span>
           </div>
-          <p>© 2026 NCRJobs Recruiter Platform. Built specifically for high growth teams in Delhi NCR.</p>
+          <p>© 2026 HireVerse Recruiter Platform. Built for high growth teams.</p>
         </div>
       </footer>
     </div>

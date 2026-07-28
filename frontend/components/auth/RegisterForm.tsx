@@ -219,7 +219,7 @@ export function RegisterForm() {
         {step < 3 && (
           <div>
             <div className="lg:hidden">
-              <Image src="/logo-wordmark.svg" alt="NCRJobs" width={160} height={40} className="h-10 w-auto" />
+              <Image src="/logo-wordmark.svg" alt="HireVerse" width={160} height={40} className="h-10 w-auto" />
             </div>
             <p className="mt-4 text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Student registration</p>
             <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[var(--on-surface)] font-display">
@@ -369,7 +369,7 @@ export function RegisterForm() {
               Welcome aboard! 🎉
             </h2>
             <p className="text-sm font-semibold text-[var(--on-surface-variant)] leading-relaxed max-w-sm mb-10">
-              Your student profile has been successfully created on NCRJobs. You are now being redirected to your dashboard.
+              Your student profile has been successfully created on HireVerse. You are now being redirected to your dashboard.
             </p>
             <div className="flex gap-3 items-center">
               <div className="w-5 h-5 border-4 border-slate-200 border-t-[var(--primary)] rounded-full animate-spin"></div>

@@ -34,11 +34,11 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div>
           <div className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="NCRJobs" width={40} height={40} className="h-10 w-10" />
-            <span className="text-lg font-black tracking-tight text-[var(--on-surface)] font-display">NCRJobs</span>
+            <Image src="/logo.svg" alt="HireVerse" width={40} height={40} className="h-10 w-10" />
+            <span className="text-lg font-black tracking-tight text-[var(--on-surface)] font-display">HireVerse</span>
           </div>
           <p className="mt-4 text-sm leading-6 text-[var(--on-surface-variant)]">
-            NCR-first job portal for students. Discover verified internships, apply quickly, and track outcomes in one dashboard.
+            HireVerse job portal for students. Discover verified internships, apply quickly, and track outcomes in one dashboard.
           </p>
         </div>
         {footerLinks.map((column) => (
@@ -55,7 +55,7 @@ export function SiteFooter() {
         ))}
       </div>
       <div className="border-t border-[var(--outline-variant)] py-4 text-center text-xs text-[var(--on-surface-variant)]">
-        NCRJobs © 2026. All rights reserved.
+        HireVerse © 2026. All rights reserved.
       </div>
     </footer>
   );

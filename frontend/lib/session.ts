@@ -23,14 +23,14 @@ export const clearSession = () => {
   localStorage.removeItem(userKey);
 };
 
-export const roleRouteMap = {
+export const roleRouteMap: Record<Role, string> = {
   STUDENT: "/student",
   RECRUITER: "/recruiter/dashboard",
-  STAFF: "/staff",
+  ADMIN: "/admin",
 };
 
 export const roleLoginRouteMap: Record<Role, string> = {
   STUDENT: "/login",
   RECRUITER: "/recruiter/login",
-  STAFF: "/staff/login",
+  ADMIN: "/admin/login",
 };

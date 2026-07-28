@@ -3,7 +3,7 @@ import { ArrowRight, BadgeCheck, FileText, GraduationCap } from "lucide-react";
 
 const cards = [
   { title: "Create profile", href: "/register", icon: GraduationCap, text: "Build a student profile that recruiters can trust and verify quickly." },
-  { title: "Apply smart", href: "/student/jobs", icon: FileText, text: "Apply to NCR internships and entry roles with a clean one-tap flow." },
+  { title: "Apply smart", href: "/student/jobs", icon: FileText, text: "Apply to internships and entry roles with a clean one-tap flow." },
   { title: "Track results", href: "/student/applications", icon: BadgeCheck, text: "See shortlist, interview, and offer updates in one simple dashboard." },
 ];
 

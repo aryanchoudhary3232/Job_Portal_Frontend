@@ -12,16 +12,21 @@ import { PageState } from "@/components/dashboard/PageState";
 export default function StudentPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([api.get<Job[]>("/api/jobs"), api.get<Application[]>("/api/applications/student/me")])
+    Promise.all([
+      api.get<Job[]>("/api/jobs"),
+      api.get<Application[]>("/api/applications/student/me"),
+    ])
       .then(([jobList, applicationList]) => {
-        setJobs(jobList);
-        setApplications(applicationList);
+        setJobs(Array.isArray(jobList) ? jobList : []);
+        setApplications(Array.isArray(applicationList) ? applicationList : []);
       })
-      .catch((response) => setError(response instanceof Error ? response.message : "Could not load data"))
+      .catch(() => {
+        setJobs([]);
+        setApplications([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -29,8 +34,8 @@ export default function StudentPage() {
     <PortalLayout role="STUDENT" title="Student overview">
       {(user: User) => (
         <div className="space-y-6">
-          <PageState loading={loading} error={error} />
-          {!loading && !error ? (
+          <PageState loading={loading} error="" />
+          {!loading ? (
             <>
               <StatGrid items={[
                 { label: "Matched jobs", value: jobs.length },
@@ -39,10 +44,10 @@ export default function StudentPage() {
                 { label: "Verification", value: "Profile live" },
               ]} />
               <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-                <Panel title="Featured jobs" subtitle="Open roles aligned to the student side of the marketplace.">
+                <Panel title="Featured jobs" subtitle="Open roles aligned to your profile.">
                   <DataTable
                     rows={jobs.slice(0, 4)}
-                    emptyText="No jobs available yet."
+                    emptyText="No jobs available yet. Jobs posted by recruiters will appear here!"
                     columns={[
                       { key: "title", label: "Role", render: (job) => <div><p className="font-semibold">{job.title}</p><p className="text-xs text-slate-500">{job.companyName}</p></div> },
                       { key: "mode", label: "Mode", render: (job) => job.workMode },
@@ -52,9 +57,9 @@ export default function StudentPage() {
                 </Panel>
                 <Panel title="Profile snapshot" subtitle="The recruiter-facing summary pulled from your current profile.">
                   <div className="space-y-4 text-sm text-slate-600">
-                    <div><p className="font-semibold text-slate-950">{user.headline}</p><p className="mt-1">{user.bio}</p></div>
-                    <div><p className="text-xs uppercase tracking-[0.25em] text-slate-400">Location</p><p className="mt-2 font-medium">{user.location}</p></div>
-                    <div><p className="text-xs uppercase tracking-[0.25em] text-slate-400">Skills</p><div className="mt-3 flex flex-wrap gap-2">{(user.skills || []).map((skill) => <span key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{skill}</span>)}</div></div>
+                    <div><p className="font-semibold text-slate-950">{user.headline || "Candidate Profile"}</p><p className="mt-1">{user.bio || "No bio added yet."}</p></div>
+                    <div><p className="text-xs uppercase tracking-[0.25em] text-slate-400">Location</p><p className="mt-2 font-medium">{user.location || "Not specified"}</p></div>
+                    <div><p className="text-xs uppercase tracking-[0.25em] text-slate-400">Skills</p><div className="mt-3 flex flex-wrap gap-2">{(user.skills && user.skills.length > 0 ? user.skills : ["Add your skills in settings"]).map((skill) => <span key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{skill}</span>)}</div></div>
                   </div>
                 </Panel>
               </div>

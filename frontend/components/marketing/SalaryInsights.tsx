@@ -12,7 +12,7 @@ export function SalaryInsights() {
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--primary)]">Salary insights</p>
         <h2 className="mt-3 text-3xl font-black tracking-[-0.03em] text-[var(--on-surface)] font-display">Know your market value</h2>
         <p className="mt-4 text-sm leading-7 text-[var(--on-surface-variant)]">
-          Explore typical stipend and entry-level salary ranges for popular student roles in NCR. Use this to set expectations before you apply.
+          Explore typical stipend and entry-level salary ranges for popular student roles. Use this to set expectations before you apply.
         </p>
         <div className="mt-6 grid gap-4">
           {insights.map((item) => (

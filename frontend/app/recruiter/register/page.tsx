@@ -610,7 +610,7 @@ export default function RecruiterRegisterPage() {
                 Congratulations! 🎉
               </h2>
               <p className="text-sm font-semibold text-slate-500 leading-relaxed max-w-sm mb-10">
-                Your company profile has been successfully registered on NCRJobs. You are now being redirected to your Recruiter Dashboard.
+                Your company profile has been successfully registered on HireVerse. You are now being redirected to your Recruiter Dashboard.
               </p>
               <div className="flex gap-3 items-center">
                 <div className="w-5 h-5 border-4 border-slate-200 border-t-purple-600 rounded-full animate-spin"></div>

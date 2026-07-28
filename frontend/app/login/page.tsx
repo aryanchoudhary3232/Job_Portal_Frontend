@@ -9,7 +9,7 @@ export default function LoginPage() {
       title="Return to your student dashboard in seconds."
       description="Access internships, entry roles, and your application tracker with one clean login."
       stickerTitle="Student sign in"
-      stickerSubtitle="Resume your NCR job search with verified student openings."
+      stickerSubtitle="Resume your job search with verified student openings."
       stickerImage="/auth-login-illustration.svg"
       topRightLink={
         <span className="text-sm text-[var(--on-surface-variant)]">
