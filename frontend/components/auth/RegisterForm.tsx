@@ -244,7 +244,9 @@ export function RegisterForm() {
         {step === 1 && (
           <div className="space-y-5">
             <div className="block">
-              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Mobile Number</span>
+              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+                Mobile Number <span className="text-red-500 font-bold ml-0.5">*</span>
+              </span>
               <div className="flex gap-2">
                 <span className="flex items-center justify-center h-12 rounded-xl bg-[var(--surface-container-low)] px-3 text-sm font-semibold text-[var(--on-surface)]">+91</span>
                 <input
@@ -261,7 +263,9 @@ export function RegisterForm() {
 
             {otpSent && !otpVerified && (
               <div className="block">
-                <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Enter OTP</span>
+                <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+                  Enter OTP <span className="text-red-500 font-bold ml-0.5">*</span>
+                </span>
                 <input
                   type="text"
                   maxLength={4}
@@ -492,7 +496,9 @@ function Field({ label, type = "text", value, onChange, ...props }: {
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">{label}</span>
+      <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+        {label} <span className="text-red-500 font-bold ml-0.5">*</span>
+      </span>
       <input {...props} type={type} value={value} onChange={onChange} className="h-12 w-full rounded-xl bg-[var(--surface-container-low)] px-4 text-sm text-[var(--on-surface)] outline-none transition focus:ring-2 focus:ring-[var(--primary)]" required />
     </label>
   );

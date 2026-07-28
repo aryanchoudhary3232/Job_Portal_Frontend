@@ -211,7 +211,7 @@ function JobForm({ onSuccess }: { onSuccess: () => void }) {
       {fields.map((field) => (
         <div key={field.name} className="space-y-1">
           <label className="block text-xs font-extrabold uppercase tracking-wider text-slate-500">
-            {field.label}
+            {field.label} <span className="text-red-500 font-bold ml-0.5">*</span>
           </label>
           <input
             name={field.name}
@@ -225,7 +225,7 @@ function JobForm({ onSuccess }: { onSuccess: () => void }) {
       {/* Custom Designed Work Mode Dropdown Selector */}
       <div className="space-y-2">
         <label className="block text-xs font-extrabold uppercase tracking-wider text-slate-500">
-          Work Mode Selection
+          Work Mode Selection <span className="text-red-500 font-bold ml-0.5">*</span>
         </label>
         <div className="grid grid-cols-3 gap-2">
           {workModes.map((mode) => {
@@ -253,7 +253,7 @@ function JobForm({ onSuccess }: { onSuccess: () => void }) {
 
       <div className="space-y-1">
         <label className="block text-xs font-extrabold uppercase tracking-wider text-slate-500">
-          Role Description
+          Role Description <span className="text-red-500 font-bold ml-0.5">*</span>
         </label>
         <textarea
           name="description"

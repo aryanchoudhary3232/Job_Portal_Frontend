@@ -72,20 +72,28 @@ export default function RecruiterSettingsPage() {
               }}
             >
               <div className="space-y-1">
-                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Recruiter Full Name</label>
-                <input name="fullName" defaultValue={user.fullName || ""} placeholder="Full Name" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none" />
+                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                  Recruiter Full Name <span className="text-red-500 font-bold ml-0.5">*</span>
+                </label>
+                <input name="fullName" required defaultValue={user.fullName || ""} placeholder="Full Name" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none focus:border-purple-600" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Headline / Title</label>
-                <input name="headline" defaultValue={user.headline || ""} placeholder="Headline" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none" />
+                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                  Headline / Title <span className="text-red-500 font-bold ml-0.5">*</span>
+                </label>
+                <input name="headline" required defaultValue={user.headline || ""} placeholder="Headline" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none focus:border-purple-600" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Location</label>
-                <input name="location" defaultValue={user.location || ""} placeholder="Location" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none" />
+                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                  Location <span className="text-red-500 font-bold ml-0.5">*</span>
+                </label>
+                <input name="location" required defaultValue={user.location || ""} placeholder="Location" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none focus:border-purple-600" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Company Name</label>
-                <input name="companyName" defaultValue={user.companyName || ""} placeholder="Company Name" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none" />
+                <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                  Company Name <span className="text-red-500 font-bold ml-0.5">*</span>
+                </label>
+                <input name="companyName" required defaultValue={user.companyName || ""} placeholder="Company Name" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium text-slate-800 outline-none focus:border-purple-600" />
               </div>
               <div className="md:col-span-2 space-y-1">
                 <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Company Overview / Bio</label>

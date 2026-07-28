@@ -225,7 +225,9 @@ export function LoginForm() {
       {loginMethod === "email" && (
         <form onSubmit={handleEmailLogin} className="space-y-4">
           <label className="block">
-            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Email Address</span>
+            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Email Address <span className="text-red-500 font-bold ml-0.5">*</span>
+            </span>
             <input
               type="email"
               value={email}
@@ -237,7 +239,9 @@ export function LoginForm() {
           </label>
 
           <label className="block">
-            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Password</span>
+            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Password <span className="text-red-500 font-bold ml-0.5">*</span>
+            </span>
             <input
               type="password"
               value={password}
@@ -262,7 +266,9 @@ export function LoginForm() {
       {loginMethod === "mobile" && (
         <form onSubmit={handleVerifyOtpAndLogin} className="space-y-4">
           <label className="block">
-            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Mobile Number</span>
+            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+              Mobile Number <span className="text-red-500 font-bold ml-0.5">*</span>
+            </span>
             <div className="flex gap-2">
               <span className="flex items-center justify-center h-12 rounded-xl bg-[var(--surface-container-low)] px-3 text-sm font-bold text-[var(--on-surface)]">+91</span>
               <input
@@ -291,7 +297,9 @@ export function LoginForm() {
 
           {otpSent && (
             <label className="block">
-              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">Enter 4-Digit OTP</span>
+              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-[var(--on-surface-variant)]">
+                Enter 4-Digit OTP <span className="text-red-500 font-bold ml-0.5">*</span>
+              </span>
               <input
                 type="text"
                 maxLength={4}
